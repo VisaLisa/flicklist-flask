@@ -11,7 +11,7 @@ def index():
     today_movie = get_random_movie()
     tomorrow_movie = get_random_movie()
     while tomorrow_movie == today_movie:
-        tomorrow_movie = get_random_movie() 
+        tomorrow_movie = get_random_movie()
 
     # build the response string
     content = "<h1>Movie of the Day</h1>"
