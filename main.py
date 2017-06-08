@@ -20,19 +20,20 @@ def index():
     content += "</ul>"
 
     # TODO: pick another random movie, and display it under
-    content = "<h1>Tommorrow's Movie</h1>"
-    content += "<ul>"
-    content += "<li>" + tomorrow_movie + "</li>"
-    content += "</ul>"
+    tom_content = "<h1>Tommorrow's Movie</h1>"
+    tom_content += "<ul>"
+    tom_content += "<li>" + tomorrow_movie + "</li>"
+    tom_content += "</ul>"
 
-    return content
+    return content + tom_content
 
 def get_random_movie():
     # make a list with at least 5 movie titles
     movie_list = ['Get Out', 'Ultraman', 'Harry Potter', 'Big Hero 6', 'Mulan']
     #randomly choose one of the movies, and return it
-    select_movie = random.choice (movie_list)
-    return "The Big Lebowski"
+    select_movie = random.choice(movie_list)
+
+    return select_movie
 
 
 app.run()
