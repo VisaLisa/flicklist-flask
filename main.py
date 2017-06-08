@@ -8,18 +8,21 @@ app.config['DEBUG'] = True      # displays runtime errors in the browser, too
 @app.route("/")
 def index():
     # choose a movie by invoking our new function
-    movie = get_random_movie()
+    today_movie = get_random_movie()
+    tomorrow_movie = get_random_movie()
+    while tomorrow_movie == today_movie:
+        tomorrow_movie = get_random_movie() 
 
     # build the response string
     content = "<h1>Movie of the Day</h1>"
     content += "<ul>"
-    content += "<li>" + movie + "</li>"
+    content += "<li>" + today_movie + "</li>"
     content += "</ul>"
 
     # TODO: pick another random movie, and display it under
     content = "<h1>Tommorrow's Movie</h1>"
     content += "<ul>"
-    content += "<li>" + movie + "</li>"
+    content += "<li>" + tomorrow_movie + "</li>"
     content += "</ul>"
 
     return content
