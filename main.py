@@ -1,5 +1,4 @@
-from flask import Flask, request, redirect
-
+from flask import Flask, request, redirect,render_template
 import cgi
 
 app = Flask(__name__)
@@ -80,7 +79,7 @@ def add_movie():
         return redirect('/?error={0}'.format(error_msg))
 
     # build response content
-    new_movie_element = "<strong>" + cgi.escape(new_movie) + "</strong>"
+    new_movie_element = "<strong>" + new_movie_escaped + "</strong>"
     sentence = new_movie_element + " has been added to the watchlist"
     content = page_header + "<p>" + sentence + "</p>" + page_footer
 
@@ -88,19 +87,13 @@ def add_movie():
 
 @app.route("/")
 def index():
-    edit_header = '<h2>Edit My WatchList</h2>'
-
-    error = request.args.get('error')
+    error = request.args.get("error")
     if error:
-        esc_error = cgi.escape(error, quote=True)
-        error_element = '<p class="error">{0}</p>'.format(esc_error)
-    else:
-        error_element = ''
+        error = cgi.escape(error, quote=True)
 
-    # build the response string
-    content = page_header + edit_header + error_element + add_form + crossoff_form + page_footer
-    #content = page_header + edit_header + error_element + add_form  + crossoff_form + page_footer
-    return content
-
+    return render_template('add.html',
+        watchlist= get_current_watchlist(),  #key value parameter
+        error = error         #key value parameter
+    )
 
 app.run()
